@@ -9,15 +9,26 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
+    -- Configure LazyVim to load gruvbox
     { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = {
       colorscheme = "gruvbox",
     } },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
     -- import any extras modules here
+    {
+      import = "lazyvim.plugins.extras.coding.copilot",
+      opts = {
+        suggestion = { enabled = true },
+        panel = { enabled = false },
+      },
+    },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { "ellisonleao/gruvbox.nvim" },
+    { "tpope/vim-dadbod" },
+    { "kristijanhusak/vim-dadbod-ui" },
 
-    -- Configure LazyVim to load gruvbox
     -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
     { import = "plugins" },
