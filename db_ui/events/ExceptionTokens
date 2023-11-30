@@ -1,0 +1,29 @@
+#describe notification;
+#select * from notification order by id desc limit 100;
+
+#select * from exception_public_shared_links where token = 'b4af94c7908e710470c27b9ad57e6dd5468c2dd32c2697ca4fb746a3d49da858';
+#select * from truck_shipment_flag where external_id = 'QDZQF6LKE5LW';
+#select * from exception_public_shared_links where exception_id = 366262;
+#select linked_shipment_id from truck_shipments where id = 1635161;
+#select * from loading_events where id = 1301170;
+#
+#UPDATE truck_shipment_flag 
+#SET truck_shipment_id = 1635161
+#WHERE id = 366262;
+#
+#select * from truck_shipment_flag where external_id = 'QDZQF6LKE5LW';
+
+
+#select * from exception_public_shared_links where token = 'b4af94c7908e710470c27b9ad57e6dd5468c2dd32c2697ca4fb746a3d49da858';
+#select * from truck_shipment_flag where id =367674;
+##select * from exception_public_shared_links where exception_id = 366262;
+#select linked_shipment_id from truck_shipments where id = 1638716;
+#select * from loading_events where id = 1314401;
+##
+#UPDATE truck_shipment_flag 
+#SET truck_shipment_id = 1638716
+#WHERE id = 367674;
+##
+#select * from truck_shipment_flag where id =367674;
+#select * from truck_shipment_flag where external_id = 'QDZQF6LKE5LW';
+

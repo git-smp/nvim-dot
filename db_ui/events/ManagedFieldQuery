@@ -1,0 +1,66 @@
+#select * from truck_shipments where id = 1587751;
+#select id, pushed_at from pallet_events where truck_id IN (1587751, 1589591);
+#select * from truck_shipments where additional_fields is not null order by id desc limit 10;
+#select * from notification order by id desc limit 20;
+
+select *
+        FROM truck_shipments ts
+        WHERE ts.id IN (1633124,1633117,1633112,1633087,1633084,1633083,1633041,1633049,1633029,1632856,1632855,1632926,1632854,1633085,1632838,1632827,1632826,1632816,1632806,1632786,1632772,1633032,1632756,1632727,1632688,1632576,1632463,1632232,1632231,1632230,1632229,1632228,1632227,1632226,1632225,1632224,1632223,1632222,1632221,1632220,1632219,1632218,1632217,1632216,1632215,1632214,1632213,1632212,1632211,1632210,1632209,1632208,1632207,1632206,1632205,1632204,1632203,1632202,1632201,1632200,1632199,1632198,1632197,1632196,1632195,1632194,1632193,1632192,1632191,1632190,1632189,1632188,1632187,1632186,1632185,1632076,1632075,1632074,1632073,1632072,1632071,1632799,1632070,1632069,1632068,1632067,1632066,1632065,1632064,1632063,1632062,1633042,1632061,1632060,1632059,1632058,1632057,1632056,1633113,1632055,1633088,1632054,1632051,1632997,1632050,1632588,1632049,1632653,1632048,1632743,1632047,1632754,1632046,1632045,1632579,1632044,1632430,1632043,1632428,1632042,1632431,1632041,1632429,1632040,1632039,1632038,1632346,1632037,1632394,1632036,1632028,1632801,1632027,1632026,1632025,1632024,1632023,1633053,1632022,1633030,1632021,1632020,1632019,1633031,1632018,1632685,1632017,1632739,1632016,1632797,1632015,1632014,1632013,1632784,1632012,1632874,1632011,1632499,1632010,1632009,1632008,1632007,1632541,1632006,1632443,1632004,1632532,1632003,1632572,1632002,1632001,1632476,1632000,1631999,1631998,1632474,1631997,1631996,1631995,1632466,1631994,1632475,1631993,1631992,1627357,1627277,1627243,1627235,1627222,1627212,1632393,1627211,1632388,1606695,1587670,1632757,1561213) AND (
+          EXISTS (
+            SELECT 1
+            FROM pallet_events pe
+            CROSS JOIN JSON_TABLE(
+                pe.pallet_content_ids, 
+                '$[*]' COLUMNS (
+                    identifier VARCHAR(255) PATH '$.identifier',
+                    `type` VARCHAR(255) PATH '$.type'
+                )
+            ) AS pallet_content
+            WHERE ts.id = pe.truck_id 
+                        AND pallet_content.identifier LIKE '%00035-100%'
+                        AND pallet_content.`type` = 'sku' 
+          )
+          OR EXISTS (
+            SELECT 1
+            FROM pallet_events pe
+            CROSS JOIN JSON_TABLE(
+                pe.license_plate_numbers, 
+                '$[*]' COLUMNS (
+                    identifier VARCHAR(255) PATH '$.identifier',
+                    type VARCHAR(255) PATH '$.type'
+                )
+            ) AS license_plate
+            WHERE ts.id = pe.truck_id 
+                        AND license_plate.identifier LIKE '%00035-100%'
+                        AND license_plate.`type` = 'sku' 
+          )
+          OR EXISTS (
+            SELECT 1
+            FROM pallet_events pe
+            CROSS JOIN JSON_TABLE(
+                pe.fields, 
+                '$[*]' COLUMNS (
+                    value VARCHAR(255) PATH '$.value',
+                    name VARCHAR(255) PATH '$.name'
+                )
+            ) AS fields
+            WHERE ts.id = pe.truck_id 
+                        AND fields.value LIKE '%00035-100%'
+                        AND fields.`name` = 'sku' 
+          )
+          );
+
+#            SELECT pallet_content.identifier, pallet_content.type 
+#            FROM pallet_events pe
+#            CROSS JOIN JSON_TABLE(
+#                pe.pallet_content_ids, 
+#                '$[*]' COLUMNS (
+#                    identifier VARCHAR(255) PATH '$.identifier',
+#                    `type` VARCHAR(255) PATH '$.type'
+#                )
+#            ) AS pallet_content
+#            WHERE pe.truck_id IN (1632997)
+#                        AND pallet_content.identifier LIKE '%00035-100%'
+#                        AND pallet_content.`type` = 'sku' 
+
+

@@ -1,0 +1,25 @@
+SELECT truck_shipments.facility_id, truck_shipments.created_at, truck_shipments.id ,osd_claim.*, osd_claim_items.*
+FROM osd_claim
+JOIN truck_shipments ON osd_claim.shipment_id = truck_shipments.id
+JOIN osd_claim_items ON osd_claim_items.osd_claim_id = osd_claim.id
+WHERE ((
+    (NOT JSON_CONTAINS(osd_claim.shared_email_group, '10')) AND
+    truck_shipments.facility_id = 21 
+  ) OR (
+    (NOT JSON_CONTAINS(osd_claim.shared_email_group, '11') AND 
+     NOT JSON_CONTAINS(osd_claim.shared_email_group, '1')) AND
+    truck_shipments.facility_id = 10 
+  ) OR (
+    (NOT JSON_CONTAINS(osd_claim.shared_email_group, '1')) AND
+    truck_shipments.facility_id = 10 
+  ) OR (
+    (NOT JSON_CONTAINS(osd_claim.shared_email_group, '3')) AND
+    truck_shipments.facility_id = 27 
+  )) AND (
+    osd_claim_items.error_code = 'Damage' OR
+    (osd_claim_items.error_code = 'Shortage' AND
+    (osd_claim_items.same_as_bol = 0 OR osd_claim_items.same_as_bol is NULL))
+  ) AND (
+    truck_shipments.created_at >= DATE_SUB(NOW(), INTERVAL 2 MONTH)
+  )
+ORDER BY osd_claim.id DESC;

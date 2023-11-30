@@ -1,0 +1,18 @@
+#describe notification;
+
+
+#SELECT user_id, COUNT(*) / 7 AS avg_notifications_per_day
+#FROM notification 
+#WHERE occured_at >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+#GROUP BY user_id
+#ORDER BY avg_notifications_per_day DESC
+#LIMIT 50;
+
+SELECT u.first_name, u.last_name, n.user_id, n.notification_type, COUNT(*) / 3 AS avg_notifications_per_day
+FROM notification n
+JOIN `user` u ON n.user_id = u.id
+WHERE n.occured_at >= DATE_SUB(CURDATE(), INTERVAL 3 DAY)
+GROUP BY n.user_id, n.notification_type
+ORDER BY avg_notifications_per_day DESC
+LIMIT 50;
+

@@ -1,0 +1,18 @@
+
+#select * from notification where notification_metadata->>"$.exceptionId" = "363956";
+
+#DELETE FROM notification WHERE id IN (53469, 53470, 53471, 53472, 53473, 53474, 53475, 53476, 53477);
+
+#DELETE FROM notification WHERE id IN (61429,61430,61435,61436,61437);
+#select * from notification where notification_metadata->>"$.exceptionId" = "367764";
+
+#select * from truck_shipments where id = 1605821;
+
+#select * from device where facility_id = 22;
+#select dock_id, count(*) from forklift_sessions where facility_id = 22 group by dock_id;
+#select * from notification where user_id = 5 order by id desc limit 20;
+#select * from truck_shipment_flag where id = 365303;
+
+#select * from pallet_events where truck_id IN (1632997, 1632051);
+#select * from truck_shipments where id = 1632051;
+

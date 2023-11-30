@@ -1,0 +1,42 @@
+## Top tables 
+
+#SELECT 
+#    TABLE_SCHEMA as `Database`,
+#    TABLE_NAME as `Table`,
+#    ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024, 2) as `Size (MB)`
+#FROM 
+#    information_schema.TABLES 
+#ORDER BY 
+#    (DATA_LENGTH + INDEX_LENGTH) DESC
+#LIMIT 10;
+
+WITH TotalStorage AS (
+    SELECT SUM(DATA_LENGTH + INDEX_LENGTH) AS TotalBytes
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = 'events'
+),
+
+Top20Tables AS (
+    SELECT TABLE_NAME,
+           (DATA_LENGTH + INDEX_LENGTH) AS TableBytes
+    FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = 'events'
+    ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC
+    LIMIT 20
+)
+
+SELECT t20.TABLE_NAME,
+       ROUND(t20.TableBytes/ 1024 / 1024, 2) as 'Table Bytes (MB)',
+       ROUND((t20.TableBytes / ts.TotalBytes) * 100, 2) AS PercentageOfTotal
+FROM Top20Tables t20
+JOIN TotalStorage ts
+
+UNION ALL
+
+SELECT 'Total',
+       ROUND(SUM(t20.TableBytes)/ 1024 / 1024, 2) as 'Table Bytes (MB)',
+       ROUND(SUM(t20.TableBytes) / ts.TotalBytes * 100, 2)
+FROM Top20Tables t20
+JOIN TotalStorage ts;
+
+
