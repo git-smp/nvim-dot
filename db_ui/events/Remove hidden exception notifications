@@ -1,0 +1,23 @@
+#select * from truck_shipments where id = 1710112;
+# select * from user where first_name="Tim"; // 145
+#
+#select 
+#  n.id,
+#  n.exception_id
+#from 
+#  notification as n 
+#join 
+#  truck_shipment_flag as tsf 
+#on 
+#  n.exception_id = tsf.id 
+#where 
+#  #user_id = 145 and 
+#  display_to_user = 0 
+#order by n.id desc ;
+#
+#select * from truck_shipment_flag where id = 382000;
+
+#delete from
+#  notification
+#where
+#  id in (96389, 96388)

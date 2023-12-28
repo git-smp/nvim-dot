@@ -9,3 +9,9 @@
 #28 29 30 31 33 36 39 42 52 48 44 40 57 63 69 73 75 79 81 83 84 98 99 102
 
 #INSERT INTO `events`.`dock` (`id`, `business_id`, `facility_id`, `dock_id`, `slug`, `display_name`, `hidden`, `kargo_dock`, `type`) VALUES (DEFAULT, 8, 19, 39, 'DD039', '39' , 0, 0, 'DOCK_DOOR');
+
+#INSERT INTO `events`.`dock` (`id`, `business_id`, `facility_id`, `dock_id`, `slug`, `display_name`, `hidden`, `kargo_dock`, `type`) VALUES (DEFAULT, 17, 25, 11, 'DD011', '11' , 0, 0, 'DOCK_DOOR');
+#INSERT INTO `events`.`dock` (`id`, `business_id`, `facility_id`, `dock_id`, `slug`, `display_name`, `hidden`, `kargo_dock`, `type`) VALUES (DEFAULT, 16, 25, 14, 'DD014', '14' , 0, 0, 'DOCK_DOOR');
+#INSERT INTO `events`.`dock` (`id`, `business_id`, `facility_id`, `dock_id`, `slug`, `display_name`, `hidden`, `kargo_dock`, `type`) VALUES (DEFAULT, 16, 25, 15, 'DD015', '15' , 0, 0, 'DOCK_DOOR');
+#INSERT INTO `events`.`dock` (`id`, `business_id`, `facility_id`, `dock_id`, `slug`, `display_name`, `hidden`, `kargo_dock`, `type`) VALUES (DEFAULT, 16, 25, 16, 'DD016', '16' , 0, 0, 'DOCK_DOOR');
+#INSERT INTO `events`.`dock` (`id`, `business_id`, `facility_id`, `dock_id`, `slug`, `display_name`, `hidden`, `kargo_dock`, `type`) VALUES (DEFAULT, 16, 25, 17, 'DD017', '17' , 0, 0, 'DOCK_DOOR');

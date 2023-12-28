@@ -1,0 +1,2 @@
+select dock.id, dock.dock_id, dock.facility_id, facility.slug, kargo_dock, device.id, device.part_number from dock join facility on dock.facility_id = facility.id left join device on (dock.dock_id = device.dock_id and dock.facility_id = device.facility_id) where facility.visible = 1 and kargo_dock = 0 and part_number is not null;
+

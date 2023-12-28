@@ -1,0 +1,49 @@
+#select * from truck_shipments where id = 1739420;
+#select * from shipment_note where id = 843; 
+#describe osd_claim;
+
+#select * from loading_events where id=1443799;
+#select * from pallet_events where loading_event_id=1443799;
+
+# Get current live exceptions that have deleted users shared
+select 
+  count(*) 
+from 
+  exception_user_share as eus 
+join 
+  `user` as u on eus.user_id = u.id 
+join 
+  truck_shipment_flag as e on eus.exception_id = e.id 
+where 
+  u.deleted = 1;# and
+  #e.display_to_user = 1;
+
+# Do the same for the exception owner
+select 
+  count(*) 
+from 
+  truck_shipment_flag as e 
+join 
+  `user` as u on e.owner_user_id = u.id 
+where 
+  u.deleted = 1;# and
+#  e.display_to_user = 1
+
+# Now do this for the default lists
+select
+  * 
+from
+  exception_default_owner as edo
+join 
+  `user` as u on edo.user_id = u.id 
+where 
+  u.deleted = 1;
+
+select
+  * 
+from 
+  exception_default_share_with_user as edswu
+join
+  `user` as u on edswu.user_id = u.id
+where
+  u.deleted = 1;
