@@ -16,3 +16,4 @@
 #select * from pallet_events where truck_id IN (1632997, 1632051);
 #select * from truck_shipments where id = 1632051;
 
+select * from truck_shipments limit 10;

@@ -21,10 +21,12 @@ require("lazy").setup({
     -- Install other plugins
     { "ellisonleao/gruvbox.nvim" },
     -- SQL stuff
-    { "tpope/vim-dadbod" },
-    { "kristijanhusak/vim-dadbod-ui" },
+    -- { "tpope/vim-dadbod" },
+    -- {
+    --   "kristijanhusak/vim-dadbod-ui",
+    --   -- dependencies = { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    -- },
     -- Commenting out as potential nvim-cmp conflict
-    -- { "kristijanhusak/vim-dadbod-completion" },
     -- Install neorg
     -- {
     --   "nvim-neorg/neorg",
