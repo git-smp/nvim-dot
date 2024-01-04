@@ -11,10 +11,23 @@ wk.register({
       h = {
         name = "Home",
         j = { "<cmd>Neorg templates fload hjournal<CR>", "Journal Template" },
+        w = { "<cmd>Neorg templates fload hwine<CR>", "Wine Template" },
+        b = { "<cmd>Neorg templates fload hbook<CR>", "Book Template" },
+        m = { "<cmd>Neorg templates fload hmovie<CR>", "Movie Template" },
       },
     },
   },
 }, { prefix = "<leader>" })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "norg",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.list = false
+  end,
+})
+
 return {
   "nvim-neorg/neorg",
   build = ":Neorg sync-parsers",
