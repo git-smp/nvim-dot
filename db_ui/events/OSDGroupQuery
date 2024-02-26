@@ -1,4 +1,4 @@
-SELECT truck_shipments.facility_id, truck_shipments.created_at, truck_shipments.id ,osd_claim.*, osd_claim_items.*
+SELECT truck_shipments.facility_id, truck_shipments.created_at, truck_shipments.id ,osd_claim.*, osd_claim_items.*, abs(osd_claim_items.expected_case_qty - osd_claim_items.osd_case_qty) as actual_osd_qty
 FROM osd_claim
 JOIN truck_shipments ON osd_claim.shipment_id = truck_shipments.id
 JOIN osd_claim_items ON osd_claim_items.osd_claim_id = osd_claim.id
@@ -19,7 +19,7 @@ WHERE ((
     osd_claim_items.error_code = 'Damage' OR
     (osd_claim_items.error_code = 'Shortage' AND
     (osd_claim_items.same_as_bol = 0 OR osd_claim_items.same_as_bol is NULL))
-  ) AND (
-    truck_shipments.created_at >= DATE_SUB(NOW(), INTERVAL 2 MONTH)
-  )
+)AND (
+  truck_shipments.created_at >= '2023-09-05'
+)
 ORDER BY osd_claim.id DESC;

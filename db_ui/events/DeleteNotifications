@@ -4,7 +4,6 @@
 #DELETE FROM notification WHERE id IN (53469, 53470, 53471, 53472, 53473, 53474, 53475, 53476, 53477);
 
 #DELETE FROM notification WHERE id IN (61429,61430,61435,61436,61437);
-#select * from notification where notification_metadata->>"$.exceptionId" = "367764";
 
 #select * from truck_shipments where id = 1605821;
 
@@ -16,4 +15,21 @@
 #select * from pallet_events where truck_id IN (1632997, 1632051);
 #select * from truck_shipments where id = 1632051;
 
-select * from truck_shipments limit 10;
+#select * from truck_shipments limit 10;
+
+#DELETE FROM notification where id IN (128659,128660,128661,128662,128663,128664,129065,129066,129067,129068,129069,129070,129071,129072,129073,129074,129075,129076,129077,129078,129079,131987,131988,131989,131990,131991,131992,131993,131994,131995,131996,131997,131998,131999,132000,132001,132924,133012,133013,133014,133015,133016,133017,133018,138848,138849,138850,138851,138852,138853,138854,138855,138856,138857,138858,138859,138860,138861);
+#select * from notification join truck_shipment_flag on notification_metadata->>"$.exceptionId" = truck_shipment_flag.id where display_to_user = 0; 
+
+
+ # CREATE TEMPORARY TABLE temp_ids AS
+ #SELECT notification.id
+ #FROM notification
+ #JOIN truck_shipment_flag
+ #ON notification.notification_metadata->>"$.exceptionId" = truck_shipment_flag.id
+ #WHERE display_to_user = 0;
+
+ #DELETE FROM notification
+ #WHERE id IN (SELECT id FROM temp_ids);
+
+ #DROP TEMPORARY TABLE IF EXISTS temp_ids;
+
